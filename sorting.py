@@ -24,19 +24,55 @@ def read_data(file_name):
 
 def selection_sort(seznam, direction = "ascending"):
     if direction == "ascending":
-        seznam.sort()
+        n = len(seznam)
+        for i in range(n):
+            # Najdeme index nejmenšího prvku od i do konce
+            min_index = i
+            for j in range(i + 1, n):
+                if seznam[j] < seznam[min_index]:
+                    min_index = j
+            # Prohodíme nejmenší prvek s prvkem na pozici i
+            seznam[i], seznam[min_index] = seznam[min_index], seznam[i]
         return seznam
     elif direction == "descending":
-        seznam.sort()
-        seznam.reverse()
+        n = len(seznam)
+        for i in range(n):
+            # Najdeme index největšího prvku od i do konce
+            max_index = i
+            for j in range(i + 1, n):
+                if seznam[j] > seznam[max_index]:
+                    max_index = j
+            # Prohodíme největší prvek s prvkem na pozici i
+            seznam[i], seznam[max_index] = seznam[max_index], seznam[i]
         return seznam
     else:
         return print("Invalid direction")
 
+def bubble_sort(number_array):
+    n = len(number_array)
+    for i in range(n):
+        for j in range(0, n - 1 - i):
+            if number_array[j] > number_array[j + 1]:
+                number_array[j], number_array[j + 1] = number_array[j + 1], number_array[j]
+    return number_array
+
+def insertion_sort(number_array):
+    for i in range(1, len(number_array)):
+        suma = number_array[i]
+        j = i - 1
+        while j >= 0 and number_array[j] > suma:
+            number_array[j + 1] = number_array[j]
+            j -= 1
+        number_array[j + 1] = suma
+    return number_array
+
+
 def main():
     data = read_data("numbers.csv")
     print(data)
-    print(selection_sort([88, 36, 21, 54, 99, 1, 81, 18, 21, 36, 61], "descending"))
+    print(selection_sort([88, 36, 21, 54, 99, 1, 81, 18, 21, 36, 61], "ascending"))
+    print(bubble_sort([88, 36, 21, 54, 99, 1, 81, 18, 21, 36, 61]))
+    print(insertion_sort([88, 36, 21, 54, 99, 1, 81, 18, 21, 36, 61]))
     pass
 
 
