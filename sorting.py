@@ -1,5 +1,5 @@
 import os
-
+import csv
 
 def read_data(file_name):
     """
@@ -10,9 +10,21 @@ def read_data(file_name):
     """
     cwd_path = os.getcwd()
     file_path = os.path.join(cwd_path, file_name)
+    with open(file_path, "r") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        data = {}
+        for row in csv_reader:
+            for header, value in row.items():
+                if header not in data:
+                    data[header] = [int(value)]
+                else:
+                    data[header].append(int(value))
 
+    return data
 
 def main():
+    data = read_data("numbers.csv")
+    print(data)
     pass
 
 
