@@ -22,9 +22,21 @@ def read_data(file_name):
 
     return data
 
+def selection_sort(seznam, direction = "ascending"):
+    if direction == "ascending":
+        seznam.sort()
+        return seznam
+    elif direction == "descending":
+        seznam.sort()
+        seznam.reverse()
+        return seznam
+    else:
+        return print("Invalid direction")
+
 def main():
     data = read_data("numbers.csv")
     print(data)
+    print(selection_sort([88, 36, 21, 54, 99, 1, 81, 18, 21, 36, 61], "descending"))
     pass
 
 
